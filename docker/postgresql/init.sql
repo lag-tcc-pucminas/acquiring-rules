@@ -1,0 +1,1 @@
+CREATE DATABASE acquiring_rules_test;

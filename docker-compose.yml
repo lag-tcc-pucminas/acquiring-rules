@@ -1,0 +1,44 @@
+version: "3.9"
+services:
+  api:
+    container_name: "api.acquiring-rules.dev"
+    build:
+      context: ./
+      target: dev
+    command: server:watch
+    volumes:
+      - ./:/opt/www
+    ports:
+      - 8080:9501
+    networks:
+      - simple-payment
+
+  database:
+    container_name: "db.acquiring-rules.dev"
+    image: postgres:14.5-alpine
+    ports:
+      - 8032:5432
+    environment:
+      POSTGRES_USER: acquiring_rules
+      POSTGRES_DB: acquiring_rules
+      POSTGRES_PASSWORD: "@123456"
+    volumes:
+      - db:/var/lib/postgresql/data
+      - ./docker/postgresql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - simple-payment
+
+  redis:
+    container_name: "cache.acquiring-rules.dev"
+    image: redis:6.2.6-alpine
+    ports:
+      - "8079:6379"
+    networks:
+      - simple-payment
+
+volumes:
+  db:
+
+networks:
+  simple-payment:
+    external: true
