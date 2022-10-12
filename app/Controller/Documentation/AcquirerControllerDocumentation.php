@@ -15,7 +15,7 @@ interface AcquirerControllerDocumentation
      *      operationId="listAcquirers",
      *      summary="List Acquirers",
      *      description="List All Acquirers",
-     *      tags={"List Acquirers"},
+     *      tags={"Acquirers"},
      *      @OA\Response(
      *          response=200,
      *          description="Acquirer List",

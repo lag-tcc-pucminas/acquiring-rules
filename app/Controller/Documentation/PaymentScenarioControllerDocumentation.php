@@ -17,7 +17,7 @@ interface PaymentScenarioControllerDocumentation
      *      operationId="getScenarioById",
      *      summary="Get Scenario By Id",
      *      description="Get Scenario By Id",
-     *      tags={"Get Scenario By Id"},
+     *      tags={"Payment Scenario"},
      *      @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -46,7 +46,7 @@ interface PaymentScenarioControllerDocumentation
      *      operationId="deleteScenario",
      *      summary="Delete Scenario",
      *      description="Delete Scenario",
-     *      tags={"Delete Scenario"},
+     *      tags={"Payment Scenario"},
      *      @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -74,7 +74,7 @@ interface PaymentScenarioControllerDocumentation
      *      operationId="Get Acquirer Prioritization",
      *      summary="Get Acquirer Prioritization",
      *      description="Get Acquirer Prioritization By Parameters",
-     *      tags={"Get Acquirer Prioritization"},
+     *      tags={"Acquirer Prioritization"},
      *      @OA\Parameter(
      *         name="installment",
      *         in="query",
@@ -111,7 +111,7 @@ interface PaymentScenarioControllerDocumentation
      *      operationId="Search Scenarios",
      *      summary="Search Scenarios",
      *      description="Search Scenarios By Parameters",
-     *      tags={"Search Scenarios"},
+     *      tags={"Payment Scenario"},
      *      @OA\Parameter(
      *         name="per_page",
      *         in="query",
@@ -172,7 +172,7 @@ interface PaymentScenarioControllerDocumentation
      *     operationId="Create Payment Scenario",
      *     summary="Create Payment Scenario",
      *     description="Create Payment Scenario",
-     *     tags={"Create Payment Scenario"},
+     *     tags={"Payment Scenario"},
      *     @OA\RequestBody(
      *          required=true,
      *          @OA\JsonContent(ref="#/components/schemas/CreateScenarioRequest")
@@ -201,7 +201,7 @@ interface PaymentScenarioControllerDocumentation
      *     operationId="Update Payment Scenario",
      *     summary="Update Payment Scenario",
      *     description="Update Payment Scenario",
-     *     tags={"Update Payment Scenario"},
+     *     tags={"Payment Scenario"},
      *     @OA\RequestBody(
      *          required=true,
      *          @OA\JsonContent(ref="#/components/schemas/UpdateScenarioRequest")
