@@ -98,9 +98,10 @@ class PaymentScenarioService
         }
     }
 
-    public function getAcquirerPrioritization(array $filters): Collection
+    public function getAcquirerPrioritization(string $brand, int $installment): Collection
     {
-        $paymentScenario = $this->repository->findScenarioByAttributes($filters);
+        $paymentScenario = $this->repository->findScenarioByBrandAndInstallment($brand, $installment);
+
         if ($paymentScenario) {
             return $paymentScenario->acquirers()->orderBy('priority')->get();
         }

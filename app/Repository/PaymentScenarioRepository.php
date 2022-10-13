@@ -114,17 +114,7 @@ class PaymentScenarioRepository
         return $query->get();
     }
 
-    public function paginate(array $filters, int $perPage, int $page): LengthAwarePaginatorInterface
-    {
-        return $this->buildQuery($filters)->paginate($perPage, ['*'], 'page', $page);
-    }
-
-    public function findScenarioByAttributes(array $attributes): ?PaymentScenario
-    {
-        return $this->buildQuery($attributes)->first();
-    }
-
-    private function buildQuery(array $filters): Builder
+    public function searchAndPaginate(array $filters, int $perPage, int $page): LengthAwarePaginatorInterface
     {
         $query = $this->model->newQuery();
 
@@ -140,14 +130,17 @@ class PaymentScenarioRepository
             $query->where('installment_interval_end', '<=', $filters['installment_end']);
         }
 
-        if (!empty($filters['installment'])) {
-            $query->whereNested(function (QueryBuilder $builder) use ($filters) {
-                $builder->where('installment_interval_start', '<=', $filters['installment']);
-                $builder->where('installment_interval_end', '>=', $filters['installment']);
-            });
-        }
+        return $query->paginate($perPage, ['*'], 'page', $page);
+    }
 
-        return $query;
+    public function findScenarioByBrandAndInstallment(string $brand, int $installment): ?PaymentScenario
+    {
+        return $this->model->newQuery()
+            ->where('brand', $brand)
+            ->whereNested(function (QueryBuilder $builder) use ($installment) {
+                $builder->where('installment_interval_start', '<=', $installment);
+                $builder->where('installment_interval_end', '>=', $installment);
+            })->first();
     }
 
     private function enqueueJob(PaymentScenario $scenario): void

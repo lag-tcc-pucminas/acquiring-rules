@@ -100,6 +100,10 @@ interface PaymentScenarioControllerDocumentation
      *              type="array",
      *              @OA\Items(ref="#/components/schemas/PaymentScenarioAcquirerResource")
      *          )
+     *      ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
      *      )
      *   )
      */

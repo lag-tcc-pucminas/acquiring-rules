@@ -142,6 +142,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/PaymentScenarioAcquirerResource'
+        '400':
+          description: 'Bad Request'
   /scenarios:
     get:
       tags:

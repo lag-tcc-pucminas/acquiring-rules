@@ -48,7 +48,7 @@ class PaymentScenarioController implements PaymentScenarioControllerDocumentatio
         $perPage = (int) $request->query('per_page', 10);
         $page = (int) $request->query('page', 1);
 
-        $paginator = $this->repository->paginate($request->getQueryParams(), $perPage, $page);
+        $paginator = $this->repository->searchAndPaginate($request->getQueryParams(), $perPage, $page);
 
         return $response->json(PaymentScenarioPaginatorResource::make($paginator))->withStatus(200);
     }
@@ -79,7 +79,13 @@ class PaymentScenarioController implements PaymentScenarioControllerDocumentatio
 
     public function getAcquirerPrioritization(Request $request, Response $response): ResponseInterface
     {
-        $acquirers = $this->service->getAcquirerPrioritization($request->getQueryParams());
+        if (!$request->has(['brand', 'installment'])) {
+            return $response->json(['message' => 'The brand and installment params are required.'])->withStatus(400);
+        }
+
+        list('brand' => $brand, 'installment' => $installment) = $request->getQueryParams();
+
+        $acquirers = $this->service->getAcquirerPrioritization($brand, $installment);
 
         return $response->json(PaymentScenarioAcquirerResource::collection($acquirers))->withStatus(200);
     }
